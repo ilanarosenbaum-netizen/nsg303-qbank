@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Chart | NSG 303 Health Assessment — Exam 1 Q-Bank</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F3FB;
+    --bg-2:#EDEBFA;
+    --ink:#241F3D;
+    --ink-soft:#6C6791;
+    --violet:#6C5CE7;
+    --violet-dark:#4B3CC4;
+    --violet-tint:#EBE8FD;
+    --teal:#14B8A6;
+    --teal-dark:#0D8C7E;
+    --teal-tint:#DDFAF5;
+    --coral:#FF6B6B;
+    --coral-dark:#E14F4F;
+    --coral-tint:#FFE7E7;
+    --gold:#FFB020;
+    --gold-dark:#C87F00;
+    --gold-tint:#FFF3D9;
+    --card:#FFFFFF;
+    --line:rgba(36,31,61,0.09);
+    --line-strong:rgba(36,31,61,0.16);
+    --shadow-sm: 0 2px 6px rgba(76,60,180,0.08);
+    --shadow: 0 10px 30px -10px rgba(76,60,180,0.28);
+    --shadow-lg: 0 20px 50px -16px rgba(76,60,180,0.35);
+    --radius: 20px;
+    --grad: linear-gradient(120deg, #6C5CE7 0%, #8E7CFF 45%, #14B8A6 100%);
+    --font-display:'Poppins', sans-serif;
+    --font-body:'Inter', sans-serif;
+    --font-mono:'JetBrains Mono', monospace;
+  }
+  /* per-topic accent colors, applied via inline style / data attrs */
+  .t-ch1{--tc:#8E7CFF; --tct:#EFEBFF;}
+  .t-ch2{--tc:#14B8A6; --tct:#DDFAF5;}
+  .t-ch3{--tc:#3AA6FF; --tct:#E4F3FF;}
+  .t-ch4{--tc:#FF9F43; --tct:#FFF0DF;}
+  .t-ch8{--tc:#FF6B6B; --tct:#FFE7E7;}
+  .t-ch14{--tc:#20BF6B; --tct:#E2F8EC;}
+  .t-ch22{--tc:#B84DFF; --tct:#F5E8FF;}
+
+  html[data-theme="dark"]{
+    --bg:#181528;
+    --bg-2:#201C36;
+    --ink:#EEEBFB;
+    --ink-soft:#A79FD1;
+    --violet:#8E7CFF;
+    --violet-dark:#EBE8FD;
+    --violet-tint:#2A2450;
+    --teal:#2DD4BF;
+    --teal-dark:#DDFAF5;
+    --teal-tint:#123B36;
+    --coral:#FF8787;
+    --coral-dark:#FFE7E7;
+    --coral-tint:#3E2027;
+    --gold:#FFC94D;
+    --gold-dark:#FFF3D9;
+    --gold-tint:#3B2D0E;
+    --card:#211D38;
+    --line:rgba(238,235,251,0.09);
+    --line-strong:rgba(238,235,251,0.18);
+    --shadow-sm: 0 2px 6px rgba(0,0,0,0.3);
+    --shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+    --shadow-lg: 0 20px 50px -16px rgba(0,0,0,0.6);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;}
+  html,body{background:var(--bg); color:var(--ink); font-family:var(--font-body); min-height:100vh;}
+  ::selection{background:var(--violet-tint); color:var(--violet-dark);}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 20px 90px;}
+  a{color:inherit;}
+  button{font-family:var(--font-display); cursor:pointer;}
+  .hidden{display:none !important;}
+
+  /* ---------- header ---------- */
+  header.top{background:var(--grad); position:sticky; top:0; z-index:40; box-shadow:0 4px 24px -8px rgba(76,60,180,0.4);}
+  .top-inner{max-width:1080px; margin:0 auto; padding:18px 20px 0;}
+  .brand-row{display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;}
+  .brand{display:flex; align-items:center; gap:13px;}
+  .brand-mark{width:44px;height:44px;border-radius:14px;background:rgba(255,255,255,0.22); backdrop-filter:blur(6px); display:flex;align-items:center;justify-content:center;flex-shrink:0; box-shadow:inset 0 0 0 1.5px rgba(255,255,255,0.35);}
+  .brand-mark svg{width:24px;height:24px;}
+  .brand h1{font-family:var(--font-display); font-weight:800; font-size:21px; margin:0; letter-spacing:-0.01em; color:#fff;}
+  .brand p{margin:2px 0 0; font-size:12.5px; color:rgba(255,255,255,0.85); font-family:var(--font-mono); font-weight:500;}
+  .top-actions{display:flex; gap:8px; align-items:center;}
+  .icon-btn{background:rgba(255,255,255,0.18); border:1.5px solid rgba(255,255,255,0.3); color:#fff; width:38px; height:38px; border-radius:11px; display:flex; align-items:center; justify-content:center; font-size:16px; transition:transform .15s, background .15s;}
+  .icon-btn:hover{background:rgba(255,255,255,0.3); transform:translateY(-1px);}
+
+  .ecg{width:100%; height:36px; margin-top:12px; overflow:hidden; opacity:0.9;}
+  .ecg svg{width:200%; height:100%; animation:scroll-ecg 6s linear infinite;}
+  @keyframes scroll-ecg{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+  @media (prefers-reduced-motion: reduce){ .ecg svg{animation:none;} }
+
+  .stats-bar{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:14px 0 18px;}
+  .stat{background:rgba(255,255,255,0.16); backdrop-filter:blur(6px); border:1.5px solid rgba(255,255,255,0.25); border-radius:14px; padding:11px 10px; text-align:center;}
+  .stat .n{font-family:var(--font-mono); font-size:21px; font-weight:700; color:#fff;}
+  .stat .l{font-size:10px; text-transform:uppercase; letter-spacing:.07em; color:rgba(255,255,255,0.85); margin-top:2px; font-weight:600;}
+
+  /* ---------- home ---------- */
+  .section-label{font-family:var(--font-display); font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.07em; color:var(--ink-soft); margin:30px 0 12px; display:flex; align-items:center; gap:10px;}
+  .section-label::after{content:""; flex:1; height:2px; background:var(--line); border-radius:2px;}
+
+  .chip-row{display:flex; flex-wrap:wrap; gap:9px;}
+  .chip{font-family:var(--font-display); font-weight:600; font-size:12.5px; padding:8px 15px; border-radius:999px; border:1.5px solid var(--line-strong); background:var(--card); color:var(--ink-soft); transition:all .15s; box-shadow:var(--shadow-sm);}
+  .chip.active{background:var(--tc, var(--violet)); border-color:var(--tc, var(--violet)); color:#fff; box-shadow:0 6px 16px -6px var(--tc, var(--violet));}
+  .chip:hover{border-color:var(--tc, var(--violet)); transform:translateY(-1px);}
+
+  .mode-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(225px,1fr)); gap:14px; margin-top:8px;}
+  .mode-card{background:var(--card); border:1.5px solid var(--line); border-radius:var(--radius); padding:20px; text-align:left; box-shadow:var(--shadow-sm); display:flex; flex-direction:column; gap:7px; transition:transform .18s, box-shadow .18s, border-color .18s;}
+  .mode-card:hover:not(:disabled){transform:translateY(-4px); border-color:transparent; box-shadow:var(--shadow-lg);}
+  .mode-card:disabled{opacity:.4; cursor:not-allowed;}
+  .mode-card .emoji{font-size:26px; width:48px; height:48px; border-radius:14px; background:var(--mc, var(--violet-tint)); display:flex; align-items:center; justify-content:center;}
+  .mode-card h3{font-family:var(--font-display); font-weight:700; font-size:16.5px; margin:4px 0 0; color:var(--ink);}
+  .mode-card p{font-family:var(--font-body); font-size:13.5px; color:var(--ink-soft); margin:0; line-height:1.45;}
+  .mode-card .count{font-family:var(--font-mono); font-weight:600; font-size:11px; color:var(--mc-solid, var(--violet)); margin-top:4px;}
+
+  .danger-row{margin-top:34px; display:flex; gap:10px; flex-wrap:wrap;}
+  .btn{font-family:var(--font-display); font-weight:600; font-size:13.5px; padding:10px 18px; border-radius:999px; border:1.5px solid var(--line-strong); background:var(--card); color:var(--ink); transition:transform .15s, box-shadow .15s;}
+  .btn:hover{border-color:var(--ink-soft); transform:translateY(-1px); box-shadow:var(--shadow-sm);}
+  .btn.danger{color:var(--coral-dark); border-color:var(--coral-tint); background:var(--coral-tint);}
+  .btn.danger:hover{border-color:var(--coral);}
+  .btn.primary{background:var(--grad); border-color:transparent; color:#fff; box-shadow:0 8px 20px -8px rgba(76,60,180,0.5);}
+  .btn.primary:hover{filter:brightness(1.06); transform:translateY(-1px);}
+  .btn:disabled{opacity:.4; cursor:not-allowed; transform:none !important;}
+
+  /* ---------- session ---------- */
+  .session-bar{display:flex; align-items:center; justify-content:space-between; gap:12px; margin:20px 0 12px; flex-wrap:wrap;}
+  .session-bar .left{display:flex; align-items:center; gap:10px; font-family:var(--font-mono); font-weight:600; font-size:12.5px; color:var(--ink-soft);}
+  .progress-track{height:8px; background:var(--line); border-radius:999px; overflow:hidden; margin-bottom:16px;}
+  .progress-fill{height:100%; background:var(--grad); width:0%; transition:width .3s; border-radius:999px;}
+
+  .navigator{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px;}
+  .nav-dot{width:30px; height:30px; border-radius:9px; border:1.5px solid var(--line-strong); background:var(--card); font-family:var(--font-mono); font-weight:600; font-size:11px; display:flex; align-items:center; justify-content:center; color:var(--ink-soft); transition:transform .12s;}
+  .nav-dot.current{border-color:var(--violet); color:var(--violet); font-weight:700; box-shadow:0 0 0 3px var(--violet-tint);}
+  .nav-dot.done-correct{background:var(--teal-tint); border-color:var(--teal); color:var(--teal-dark);}
+  .nav-dot.done-wrong{background:var(--coral-tint); border-color:var(--coral); color:var(--coral-dark);}
+  .nav-dot.flagged::after{content:"⚑"; position:relative; top:-1px; margin-left:2px; font-size:9px;}
+
+  .q-card{background:var(--card); border:1.5px solid var(--line); border-radius:24px; box-shadow:var(--shadow); padding:28px; }
+  .q-meta{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:16px;}
+  .tag{font-family:var(--font-display); font-weight:700; font-size:10.5px; text-transform:uppercase; letter-spacing:.04em; padding:5px 11px; border-radius:8px; background:var(--tct, var(--violet-tint)); color:var(--tc, var(--violet));}
+  .tag.sata{background:var(--gold-tint); color:var(--gold-dark);}
+  .flag-btn{margin-left:auto; background:var(--bg-2); border:1.5px solid var(--line); border-radius:999px; padding:6px 13px; font-family:var(--font-display); font-weight:600; font-size:11.5px; color:var(--ink-soft); transition:all .15s;}
+  .flag-btn.active{border-color:var(--gold); color:var(--gold-dark); background:var(--gold-tint);}
+
+  .q-stem{font-family:var(--font-body); font-weight:500; font-size:18px; line-height:1.6; color:var(--ink); margin-bottom:20px;}
+  .sata-note{font-family:var(--font-mono); font-weight:600; font-size:11.5px; color:var(--gold-dark); margin:-12px 0 18px; text-transform:uppercase; letter-spacing:.04em;}
+
+  .opt{display:flex; gap:12px; align-items:flex-start; padding:14px 16px; border:1.5px solid var(--line); border-radius:14px; margin-bottom:10px; background:var(--bg); transition:border-color .15s, background .15s, transform .1s;}
+  .opt:hover{border-color:var(--violet); transform:translateX(2px);}
+  .opt.selected{border-color:var(--violet); background:var(--violet-tint);}
+  .opt.correct-reveal{border-color:var(--teal); background:var(--teal-tint);}
+  .opt.wrong-reveal{border-color:var(--coral); background:var(--coral-tint);}
+  .opt input{margin-top:3px; accent-color:var(--violet); flex-shrink:0; width:16px; height:16px;}
+  .opt label{font-family:var(--font-body); font-size:15px; line-height:1.5; cursor:pointer;}
+  .opt-letter{font-family:var(--font-mono); font-weight:700; font-size:11px; color:var(--ink-soft); flex-shrink:0; width:18px; padding-top:2px;}
+
+  .feedback{margin-top:20px; padding:18px 20px; border-radius:16px; border:1.5px solid var(--line);}
+  .feedback.correct{background:var(--teal-tint); border-color:var(--teal);}
+  .feedback.wrong{background:var(--coral-tint); border-color:var(--coral);}
+  .feedback .verdict{font-family:var(--font-display); font-weight:700; font-size:15px; margin-bottom:8px;}
+  .feedback .verdict.correct-text{color:var(--teal-dark);}
+  .feedback .verdict.wrong-text{color:var(--coral-dark);}
+  .rationale{font-family:var(--font-body); font-size:14.5px; line-height:1.6; margin:8px 0;}
+  .tip-box{margin-top:14px; padding:13px 16px; border-radius:12px; background:var(--gold-tint); font-size:13.5px; font-family:var(--font-body); color:var(--ink);}
+  .tip-box b{font-family:var(--font-display); color:var(--gold-dark); text-transform:uppercase; font-size:11px; letter-spacing:.04em; display:block; margin-bottom:3px;}
+
+  .confidence-row{display:flex; gap:8px; margin-top:16px; flex-wrap:wrap; align-items:center;}
+  .conf-btn{font-family:var(--font-mono); font-weight:600; font-size:12px; padding:7px 14px; border-radius:999px; border:1.5px solid var(--line-strong); background:var(--card);}
+  .conf-btn.active{border-color:var(--violet); background:var(--violet-tint); color:var(--violet-dark);}
+
+  .q-actions{display:flex; justify-content:space-between; margin-top:24px; gap:10px;}
+
+  /* ---------- summary ---------- */
+  .summary-hero{text-align:center; padding:44px 20px 20px;}
+  .summary-hero .big{font-family:var(--font-mono); font-size:58px; font-weight:700; background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .summary-hero .sub{color:var(--ink-soft); font-family:var(--font-display); font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.08em; margin-top:6px;}
+  .summary-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; max-width:520px; margin:26px auto;}
+  .summary-grid .stat{background:var(--card); border:1.5px solid var(--line); box-shadow:var(--shadow-sm);}
+  .summary-grid .stat .n{color:var(--violet);}
+  .summary-grid .stat .l{color:var(--ink-soft);}
+  .summary-actions{display:flex; gap:10px; justify-content:center; margin-top:22px; flex-wrap:wrap;}
+
+  /* ---------- modal ---------- */
+  .overlay{position:fixed; inset:0; background:rgba(24,21,40,0.6); backdrop-filter:blur(3px); display:flex; align-items:center; justify-content:center; z-index:100; padding:20px;}
+  .modal{background:var(--card); border-radius:22px; max-width:380px; width:100%; padding:28px; text-align:center; box-shadow:var(--shadow-lg); border:1.5px solid var(--line);}
+  .modal h3{font-family:var(--font-display); font-weight:700; margin:10px 0 6px;}
+  .modal p{font-size:14px; color:var(--ink-soft); line-height:1.55;}
+  .modal-actions{display:flex; gap:10px; margin-top:20px; justify-content:center;}
+  .toast{position:fixed; bottom:26px; left:50%; transform:translateX(-50%); background:var(--ink); color:var(--bg); font-family:var(--font-display); font-weight:600; font-size:13.5px; padding:13px 22px; border-radius:999px; z-index:200; box-shadow:var(--shadow-lg); opacity:0; transition:opacity .25s, transform .25s;}
+  .toast.show{opacity:1;}
+
+  footer.foot{text-align:center; padding:32px 20px 10px; color:var(--ink-soft); font-family:var(--font-mono); font-weight:500; font-size:11.5px;}
+
+  .confetti-piece{position:fixed; top:-20px; z-index:300; border-radius:2px; pointer-events:none; animation:confetti-fall linear forwards;}
+  @keyframes confetti-fall{ to{ transform:translateY(110vh) rotate(540deg); opacity:0.4; } }
+
+  @media (max-width:600px){
+    .q-card{padding:20px;}
+    .q-stem{font-size:16.5px;}
+    .summary-grid{grid-template-columns:repeat(3,1fr); gap:8px;}
+    .summary-hero .big{font-size:44px;}
+    .stats-bar{grid-template-columns:repeat(2,1fr);}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand-row">
+      <div class="brand">
+        <div class="brand-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2 8 4-16 2 8h6"/></svg>
+        </div>
+        <div>
+          <h1>The Chart</h1>
+          <p>NSG 303 · Health Assessment — Exam 1 Make-Up Review</p>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="icon-btn" id="themeToggle" title="Toggle light/dark">☀️</button>
+        <button class="icon-btn" id="homeBtn" title="Home">⌂</button>
+      </div>
+    </div>
+    <div class="ecg">
+      <svg viewBox="0 0 600 40" preserveAspectRatio="none">
+        <polyline id="ecgLine" points="0,20 40,20 55,20 62,6 70,34 78,20 100,20 140,20 155,20 162,6 170,34 178,20 200,20 240,20 255,20 262,6 270,34 278,20 300,20 340,20 355,20 362,6 370,34 378,20 400,20 440,20 455,20 462,6 470,34 478,20 500,20 540,20 555,20 562,6 570,34 578,20 600,20"
+          fill="none" stroke="#1F6F63" stroke-width="2"/>
+        <polyline points="600,20 640,20 655,20 662,6 670,34 678,20 700,20 740,20 755,20 762,6 770,34 778,20 800,20 840,20 855,20 862,6 870,34 878,20 900,20 940,20 955,20 962,6 970,34 978,20 1000,20 1040,20 1055,20 1062,6 1070,34 1078,20 1100,20 1140,20 1155,20 1162,6 1170,34 1178,20 1200,20"
+          fill="none" stroke="#1F6F63" stroke-width="2"/>
+      </svg>
+    </div>
+    <div class="stats-bar">
+      <div class="stat"><div class="n" id="statXP">0</div><div class="l">✨ XP</div></div>
+      <div class="stat"><div class="n" id="statAcc">—</div><div class="l">🎯 Accuracy</div></div>
+      <div class="stat"><div class="n" id="statStreak">0🔥</div><div class="l">Streak</div></div>
+      <div class="stat"><div class="n" id="statRank">Nursing Student</div><div class="l">🩺 Rank</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ===== HOME VIEW ===== -->
+  <section id="view-home">
+    <div class="section-label">Filter by chapter</div>
+    <div class="chip-row" id="topicChips"></div>
+
+    <div class="section-label">Filter by Bloom's level</div>
+    <div class="chip-row" id="bloomChips"></div>
+
+    <div class="section-label">Choose a study mode</div>
+    <div class="mode-grid" id="modeGrid"></div>
+
+    <div class="danger-row">
+      <button class="btn" id="exportBtn">↓ Export progress (JSON)</button>
+      <button class="btn danger" id="resetBtn">↺ Reset all progress</button>
+    </div>
+  </section>
+
+  <!-- ===== SESSION VIEW ===== -->
+  <section id="view-session" class="hidden">
+    <div class="session-bar">
+      <div class="left"><span id="sessionModeLabel">Study Mode</span> · <span id="sessionCounter">Q 1 of 1</span> · <span id="sessionTimer">0:00</span></div>
+      <button class="btn" id="exitSessionBtn">← Exit</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="navigator" id="navigator"></div>
+
+    <div class="q-card">
+      <div class="q-meta">
+        <span class="tag" id="tagTopic">Ch 8</span>
+        <span class="tag" id="tagBloom">Application</span>
+        <span class="tag sata hidden" id="tagSata">Select all that apply</span>
+        <button class="flag-btn" id="flagBtn">⚑ Flag</button>
+      </div>
+      <div class="q-stem" id="qStem">Loading question…</div>
+      <div id="optionsList"></div>
+
+      <div id="feedbackBox" class="feedback hidden">
+        <div class="verdict" id="verdictText"></div>
+        <div class="rationale" id="rationaleText"></div>
+        <div class="tip-box"><b>NCLEX Tip</b><div id="tipText"></div></div>
+        <div class="confidence-row" id="confidenceRow">
+          <span style="font-family:var(--font-mono);font-size:12px;color:var(--ink-soft);align-self:center;">How sure were you?</span>
+          <button class="conf-btn" data-c="sure">💚 Sure</button>
+          <button class="conf-btn" data-c="shaky">🟡 Shaky</button>
+          <button class="conf-btn" data-c="guessed">🔴 Guessed</button>
+        </div>
+      </div>
+
+      <div class="q-actions">
+        <button class="btn" id="prevBtn">← Previous</button>
+        <button class="btn primary" id="submitBtn">Submit Answer</button>
+        <button class="btn primary hidden" id="nextBtn">Next →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SUMMARY VIEW ===== -->
+  <section id="view-summary" class="hidden">
+    <div class="summary-hero">
+      <div class="big" id="summaryPct">0%</div>
+      <div class="sub" id="summaryModeLabel">Session complete</div>
+    </div>
+    <div class="summary-grid">
+      <div class="stat"><div class="n" id="sumCorrect">0</div><div class="l">Correct</div></div>
+      <div class="stat"><div class="n" id="sumWrong">0</div><div class="l">Wrong</div></div>
+      <div class="stat"><div class="n" id="sumXP">+0</div><div class="l">XP Earned</div></div>
+    </div>
+    <div class="summary-actions">
+      <button class="btn primary" id="retryBtn">🔄 Retry Same Setup</button>
+      <button class="btn" id="reviewMissedBtn">🎯 Review Missed</button>
+      <button class="btn" id="homeFromSummaryBtn">← Home</button>
+    </div>
+  </section>
+
+</div>
+
+<footer class="foot">Built from your NSG 303 Exam 1 blueprint · Ch 1–4, 8, 14, 22 · Not affiliated with UWorld or NCSBN</footer>
+
+<div id="toast" class="toast"></div>
+
+<script>
+/* =========================================================
+   QUESTION BANK — NSG 303 Health Assessment, Exam 1 topics
+   ========================================================= */
+const TOPICS = {
+  ch1:  "Ch 1 · Nurse's Role",
+  ch2:  "Ch 2 · Subjective Data",
+  ch3:  "Ch 3 · Objective Data",
+  ch4:  "Ch 4 · Documentation",
+  ch8:  "Ch 8 · Vitals & General Survey",
+  ch14: "Ch 14 · Skin, Hair, Nails",
+  ch22: "Ch 22 · Peripheral Vascular"
+};
+const BLOOMS = { recall:"Recall", application:"Application", analysis:"Analysis" };
+
+let QID = 0;
+function Q(topic, bloom, type, stem, options, answer, rationale, tip){
+  QID++;
+  return {id:QID, topic, bloom, type, stem, options, answer, rationale, tip};
+}
+
+const QUESTIONS = [
+  // ---------------- CH 1: Nurse's Role ----------------
+  Q('ch1','application','single',
+    "A first-semester nursing student asks why an entire course is devoted to physical assessment before disease-focused courses begin. What is the best explanation?",
+    ["Assessment courses satisfy an accreditation requirement and have no clinical purpose.",
+     "Learning normal findings first builds the foundation needed to recognize abnormal findings in later courses.",
+     "It replaces the need for a provider to ever examine the patient.",
+     "It is only useful for patients being admitted to the hospital."],
+    1,
+    "Health assessment teaches the nurse what is normal. Every subsequent course (pathophysiology, medical-surgical, psychiatric nursing) depends on the student already knowing baseline 'normal' so that deviations can be recognized as abnormal.",
+    "When a question frames a course or skill as 'foundational,' the correct answer usually describes how it builds toward later competence — not a narrow, one-time use."
+  ),
+  Q('ch1','recall','single',
+    "Which two components make up a complete nursing health assessment?",
+    ["Diagnosis and treatment plan","Subjective data and objective data","Screening and triage","Referral and discharge planning"],
+    1,
+    "A complete assessment always has two parts: subjective data (what the client reports, gathered through the interview and health history) and objective data (what the nurse observes, measures, or palpates during the physical exam).",
+    "Subjective = 'stated by the client.' Objective = 'detected by the examiner.' Nearly every documentation question hinges on this split."
+  ),
+  Q('ch1','application','sata',
+    "Which of the following are appropriate purposes of a nursing health assessment? Select all that apply.",
+    ["Establish baseline data for future comparison","Identify modifiable and nonmodifiable risk factors",
+     "Independently diagnose a medical disease","Formulate nursing diagnoses and clinical judgments",
+     "Independently prescribe medication","Evaluate a client's response to nursing interventions"],
+    [0,1,3,5],
+    "Assessment establishes a baseline, identifies risk factors, supports nursing diagnoses/clinical judgment, and evaluates outcomes — all within RN scope. Diagnosing disease and prescribing medication are provider (not staff RN) functions.",
+    "On SATA questions, first eliminate any option that falls outside the RN scope of practice — that usually removes at least one distractor immediately."
+  ),
+  Q('ch1','recall','single',
+    "A client's advanced age is best classified as which type of risk factor?",
+    ["Modifiable","Nonmodifiable","Environmental","Behavioral"],
+    1,
+    "Nonmodifiable risk factors — age, genetics/family history, sex, ethnicity — cannot be changed. Modifiable risk factors (smoking, diet, activity level) can be changed through behavior or intervention.",
+    "Quick sort: if the client can change it through behavior, it's modifiable. If it's fixed biology or history, it's nonmodifiable."
+  ),
+
+  // ---------------- CH 2: Subjective Data / Interview ----------------
+  Q('ch2','recall','single',
+    "Which phase of the health history interview involves reviewing the client's chart before entering the room?",
+    ["Introductory phase","Working phase","Preintroductory phase","Summary/closing phase"],
+    2,
+    "The preintroductory phase happens before the nurse ever meets the client — reviewing the existing record, referral, or chart to prepare for the interview.",
+    "Order matters: Pre-introductory (review chart) → Introductory (introduce self, explain purpose) → Working (gather history) → Summary/Closing (recap and validate)."
+  ),
+  Q('ch2','application','single',
+    "Which question is an example of effective open-ended interviewing?",
+    ["\"Is your pain sharp or dull?\"","\"Do you smoke?\"","\"Tell me what a typical day is like for you.\"","\"Are you allergic to any medications?\""],
+    2,
+    "Open-ended questions invite the client to describe something in their own words and elicit detailed, narrative information. The other options are closed-ended — they can be answered with a single word or short fact.",
+    "Closed-ended questions are efficient for quick facts (allergies, yes/no history); open-ended questions are better for exploring feelings, patterns, and the story behind a symptom."
+  ),
+  Q('ch2','application','sata',
+    "A client reports intermittent knee pain. Using the COLDSPA mnemonic, which questions would the nurse ask? Select all that apply.",
+    ["\"What does the pain feel like?\" (Character)","\"When did the pain begin?\" (Onset)",
+     "\"What medication are you currently taking for it?\" (Medication)","\"How long does each episode last?\" (Duration)",
+     "\"What makes it better or worse?\" (Pattern)","\"On a scale of 0–10, how severe is it?\" (Severity)"],
+    [0,1,3,4,5],
+    "COLDSPA = Character, Onset, Location, Duration, Severity, Pattern, Associated factors. Current medication use is part of the personal health history, not the COLDSPA symptom analysis.",
+    "COLDSPA and PQRST overlap heavily — both explore character/quality, timing, and severity — but neither mnemonic includes a medication list."
+  ),
+  Q('ch2','recall','single',
+    "In the PQRST mnemonic for pain assessment, what does the \"P\" represent?",
+    ["Past medical history","Provocation/Palliation — what worsens or relieves it","Pulse quality","Prognosis"],
+    1,
+    "PQRST: Provocation/Palliation (what makes it better or worse), Quality, Region/Radiation, Severity, Timing.",
+    "PQRST and COLDSPA both ask about aggravating/relieving factors — PQRST calls it Provocation/Palliation, COLDSPA calls it Pattern."
+  ),
+  Q('ch2','application','single',
+    "A client says, \"I've had a throbbing headache since this morning and I feel nauseated.\" This statement is an example of:",
+    ["Objective data","Subjective data","A nursing diagnosis","A collaborative problem"],
+    1,
+    "Subjective data is information the client reports about their own experience — symptoms, feelings, and perceptions — that cannot be directly observed or measured by the nurse.",
+    "If it starts with 'the client states/reports/says,' it's subjective. If the nurse measured, observed, or palpated it, it's objective."
+  ),
+  Q('ch2','application','single',
+    "Which nursing statement demonstrates a therapeutic (non-leading) approach during the interview?",
+    ["\"You haven't been skipping your insulin doses, have you?\"","\"Tell me more about how you've been managing your insulin.\"",
+     "\"I'm sure you've been taking your insulin correctly.\"","\"You know missing insulin doses is dangerous, right?\""],
+    1,
+    "A therapeutic, non-leading question invites the client to share information without suggesting the 'correct' answer. The other options are leading or judgmental and may cause the client to withhold honest information.",
+    "Leading questions often contain the answer inside the question itself (\"you haven't been... have you?\") — that phrasing is a red flag on exam items."
+  ),
+  Q('ch2','application','single',
+    "Which action best demonstrates cultural awareness during a health history interview?",
+    ["Assuming all clients from the same country share identical beliefs","Recognizing personal biases and adjusting communication to the client's expressed preferences and comfort level",
+     "Avoiding any discussion of culture to prevent offending the client","Using a standard script identical for every client regardless of background"],
+    1,
+    "Cultural awareness means recognizing one's own biases and being sensitive to similarities and differences between cultures, then using that sensitivity to communicate effectively with the individual client — not applying stereotypes or a one-size-fits-all script.",
+    "NCLEX favors answers that individualize care over answers that generalize an entire cultural group."
+  ),
+
+  // ---------------- CH 3: Objective Data / Physical Exam ----------------
+  Q('ch3','recall','single',
+    "What is the correct sequence of physical examination techniques for MOST body systems?",
+    ["Palpation, Percussion, Inspection, Auscultation","Inspection, Palpation, Percussion, Auscultation",
+     "Auscultation, Inspection, Palpation, Percussion","Percussion, Auscultation, Inspection, Palpation"],
+    1,
+    "The standard order is Inspection → Palpation → Percussion → Auscultation (IPPA) for most systems, because palpation and percussion can alter what is heard.",
+    "Remember the one big exception: the abdominal exam uses Inspection → Auscultation → Percussion → Palpation (IAPP), because palpating or percussing the abdomen first can alter bowel sounds."
+  ),
+  Q('ch3','application','single',
+    "The nurse should use the diaphragm of the stethoscope to best assess which type of sound?",
+    ["Low-pitched sounds such as S3 heart sounds","High-pitched sounds such as breath sounds and normal heart tones",
+     "Vibratory sounds only","Sounds below 100 Hz only"],
+    1,
+    "The diaphragm (the flat, larger surface) is best for high-pitched sounds — normal heart tones, breath sounds, bowel sounds. The bell is best for low-pitched sounds such as S3, S4, and some bruits.",
+    "Mnemonic: 'Diaphragm = high, Bell = low, Bell = soft touch.' Press the bell lightly; pressing it firmly turns it into a diaphragm."
+  ),
+  Q('ch3','application','single',
+    "During percussion of a healthy adult's lung fields, the nurse would expect to hear which sound?",
+    ["Dullness","Flatness","Resonance","Tympany"],
+    2,
+    "Resonance is the normal, hollow, low-pitched sound heard over healthy lung tissue. Dullness suggests a denser structure (liver, fluid), flatness suggests very dense tissue (bone, large effusion), and tympany is a drum-like sound typically heard over a gas-filled stomach.",
+    "Percussion sounds form a spectrum from most dense to least dense: flat → dull → resonant → hyperresonant → tympanic."
+  ),
+  Q('ch3','application','single',
+    "A client reports feeling dizzy. The nurse observes the client's blood pressure drop from 128/78 to 98/60 when moving from lying to standing. Which term best describes the blood pressure reading?",
+    ["A symptom, because it is something the nurse detects","A sign, because it is objective data the nurse can measure",
+     "Subjective data","A nursing diagnosis"],
+    1,
+    "A sign is objective, measurable data detected by the examiner (the BP reading). A symptom is subjective data reported by the client (feeling dizzy).",
+    "Sign = seen/measured by the nurse (objective). Symptom = stated by the client (subjective). 'Sign' and 'seen' both start with S — a quick memory hook."
+  ),
+  Q('ch3','recall','single',
+    "Light palpation is most appropriate for assessing which of the following?",
+    ["Deep abdominal organs and masses","Pulses, surface tenderness, and temperature","The kidneys and spleen only","Uterine size in the third trimester"],
+    1,
+    "Light palpation (about 1 cm depth) assesses superficial structures — pulses, texture, tenderness, and temperature. Deep palpation and bimanual technique are used for organs, masses, and deeper structures.",
+    "Depth scale: light = surface findings; moderate = organs/masses; deep = deep organs/structures; bimanual = uses two hands (uterus, spleen, kidneys)."
+  ),
+  Q('ch3','application','single',
+    "Which adjustment is most appropriate when performing a physical exam on an older adult client?",
+    ["Rush through the exam to minimize fatigue","Allow extra time, offer rest breaks, and warm hands/equipment before touching the client",
+     "Skip inspection of the skin because it is time-consuming","Avoid asking the client to reposition at all"],
+    1,
+    "Older adults may fatigue more easily and have thinner, more fragile skin and joints. Allowing extra time, offering rest breaks, and warming hands and equipment promote comfort and more accurate findings.",
+    "Whenever an NCLEX item asks about 'older adult considerations,' look for the answer that individualizes pacing and comfort rather than skipping steps."
+  ),
+  Q('ch3','recall','single',
+    "Which piece of equipment is used during nearly every body-system portion of the physical examination?",
+    ["Otoscope","Stethoscope","Ophthalmoscope","Reflex hammer"],
+    1,
+    "The stethoscope is used across many systems — cardiac, respiratory, abdominal, vascular — making it one of the most universally used pieces of assessment equipment.",
+    "Equipment tends to be system-specific (otoscope = ears, ophthalmoscope = eyes) except for a few tools like the stethoscope, penlight, and gloves, which cross many systems."
+  ),
+
+  // ---------------- CH 4: Documentation ----------------
+  Q('ch4','recall','single',
+    "What is a primary purpose of nursing documentation?",
+    ["To satisfy the client's curiosity about their chart","To serve as a legal record and support continuity of communication among the care team",
+     "To replace the need for verbal hand-off report","To document only abnormal findings"],
+    1,
+    "Documentation is a legal record of care and the primary way the care team communicates findings, interventions, and client status across shifts and providers.",
+    "Remember the classic legal principle: 'If it wasn't documented, it wasn't done.' Documentation questions almost always circle back to legal accountability and communication."
+  ),
+  Q('ch4','recall','single',
+    "In the SBAR communication format, what does the \"B\" represent?",
+    ["Baseline vital signs","Background — relevant history and events leading up to the situation",
+     "Bedside report only","Barriers to communication"],
+    1,
+    "SBAR = Situation, Background, Assessment, Recommendation. Background includes the client's relevant history, diagnosis, and events leading up to the current situation.",
+    "SBAR is for verbal/handoff communication; SOAP is for written notes. Keep the two formats mentally separate."
+  ),
+  Q('ch4','application','single',
+    "A nurse writes: \"O: BP 168/94, HR 110, client diaphoretic and pale.\" In the SOAP format, this entry belongs in which section?",
+    ["Subjective","Objective","Assessment","Plan"],
+    1,
+    "Vital signs, physical exam findings, and lab values are objective data measured or observed by the nurse, placing them in the 'O' (Objective) section of a SOAP note.",
+    "SOAP mirrors subjective/objective data collection: S = client's own words, O = measurable findings, A = analysis/diagnosis, P = plan of care."
+  ),
+  Q('ch4','recall','single',
+    "Which best distinguishes SBAR from SOAP documentation?",
+    ["SBAR and SOAP are identical formats used interchangeably","SBAR is typically used for verbal or written hand-off communication; SOAP is typically used as a template for a written progress note",
+     "SOAP is only used in the emergency department","SBAR replaces the need for physical assessment"],
+    1,
+    "SBAR (Situation, Background, Assessment, Recommendation) organizes a report or hand-off to another provider. SOAP (Subjective, Objective, Assessment, Plan) organizes a written progress note.",
+    "Think of SBAR as the spoken 'phone call to the doctor' format, and SOAP as the written 'chart note' format."
+  ),
+  Q('ch4','application','single',
+    "A nurse is calling a provider about a client whose condition has acutely changed. Which statement correctly represents the \"Situation\" component of SBAR?",
+    ["\"The client has a history of type 2 diabetes and hypertension.\"","\"This is Nurse Lee calling about Mr. Ortiz in room 412, who is suddenly short of breath.\"",
+     "\"I recommend we obtain a stat chest x-ray.\"","\"His oxygen saturation is 88% on room air.\""],
+    1,
+    "The Situation component states who is calling, the client, and a brief statement of the current problem. History belongs in Background, measurable findings belong in Assessment, and the requested action belongs in Recommendation.",
+    "S-B-A-R follows a natural order: identify yourself and the problem (S), give context (B), state findings (A), propose next steps (R)."
+  ),
+  Q('ch4','recall','single',
+    "Which statement reflects a correct legal principle of documentation?",
+    ["Only abnormal findings need to be documented","Documentation should be written in pencil so it can be corrected later",
+     "If care was not documented, legally it is considered not to have been done","Documentation may be backdated as long as the entry is accurate"],
+    2,
+    "The legal standard of nursing documentation is that undocumented care cannot be proven to have occurred — 'if it wasn't documented, it wasn't done.' Findings (normal and abnormal) must be recorded, entries are permanent, and backdating is not acceptable practice.",
+    "Legal/documentation questions on NCLEX usually test this exact principle — flag it as a high-yield phrase to memorize."
+  ),
+
+  // ---------------- CH 8: General Survey & Vital Signs ----------------
+  Q('ch8','recall','single',
+    "What is the expected normal oral temperature range for an adult?",
+    ["35.0–36.0°C (95.0–96.8°F)","36.5–37.7°C (96.0–99.9°F)","38.0–39.0°C (100.4–102.2°F)","34.0–35.5°C (93.2–95.9°F)"],
+    1,
+    "Normal core/oral temperature ranges from about 36.5°C to 37.7°C (96.0°F to 99.9°F), with normal diurnal variation — lowest in early morning, highest in late afternoon/evening.",
+    "Hyperthermia is generally defined as >38.0°C (100.0°F); hypothermia as <36.5°C (96.0°F) — know both cutoffs, not just the normal range."
+  ),
+  Q('ch8','application','single',
+    "Which statement about vital signs in the older adult is accurate?",
+    ["Older adults typically run a normal temperature range of 35.0–36.4°C, and may fail to spike a fever even with an active infection","Older adults always present with a high fever during infection",
+     "Vital sign ranges do not change with age","Older adults have a naturally faster respiratory rate than younger adults"],
+    0,
+    "Older adults have a lower expected temperature baseline (35.0–36.4°C / 95.0–97.5°F) and may not mount a febrile response even during a significant infection, which can mask serious illness.",
+    "This is a classic patient-safety point: a 'normal' temperature in an older adult does not rule out infection — assess the whole clinical picture."
+  ),
+  Q('ch8','recall','single',
+    "What is the normal resting pulse rate range for a healthy adult?",
+    ["40–60 bpm","60–100 bpm","100–120 bpm","120–140 bpm"],
+    1,
+    "The normal adult resting pulse range is 60–100 beats per minute.",
+    "Pair this with respirations (12–20/min) and SpO2 (92–99%) — these three numbers are extremely high-yield and easy to mix up under exam pressure."
+  ),
+  Q('ch8','application','single',
+    "On the pulse amplitude scale, a pulse graded as 2+ indicates:",
+    ["Absent pulse","Weak pulse that is easy to obliterate","Normal pulse that obliterates with moderate pressure","Bounding pulse that cannot be obliterated"],
+    2,
+    "Pulse amplitude scale: 0 = absent, 1+ = weak/diminished, 2+ = normal, 3+ = strong/full, 4+ = bounding.",
+    "The pulse amplitude and edema scales both run 0–4+, but they measure opposite ideas: for pulses, higher usually reflects a stronger flow; for edema, higher means worse/deeper swelling."
+  ),
+  Q('ch8','application','single',
+    "Which technique should the nurse use to obtain an accurate respiratory rate?",
+    ["Tell the client, \"I'm now going to count your breathing rate.\"","Continue holding the client's wrist as if still counting the pulse, and observe chest rise without alerting the client",
+     "Ask the client to breathe as deeply and quickly as possible","Count respirations only after the client has been exercising"],
+    1,
+    "Clients often unconsciously alter their breathing pattern if they know they are being watched. Continuing to hold the wrist while observing chest movement allows the nurse to count respirations without the client consciously changing the rate or depth.",
+    "This 'covert counting' technique is a favorite NCLEX detail because it tests whether the student understands that awareness changes behavior."
+  ),
+  Q('ch8','recall','single',
+    "A client with well-controlled COPD has a baseline SpO2 of 88%. How should the nurse interpret this finding?",
+    ["It is always abnormal and requires immediate intervention","It may represent that client's individual baseline, since 81–91% can be normal for someone with chronic pulmonary disease",
+     "It indicates the pulse oximeter is malfunctioning","It means the client needs to be placed on 100% oxygen immediately"],
+    1,
+    "While the general adult SpO2 norm is 92–99%, clients with chronic pulmonary disease such as COPD or emphysema may have a baseline as low as 81–91% that is normal for them. Always compare to the client's own baseline.",
+    "Whenever a question gives a chronic respiratory history alongside a 'low' SpO2, consider whether that value could be the client's normal baseline before assuming an emergency."
+  ),
+  Q('ch8','application','single',
+    "A client's blood pressure is 140/80 mmHg. What is the client's pulse pressure?",
+    ["220 mmHg","60 mmHg","110 mmHg","70 mmHg"],
+    1,
+    "Pulse pressure = systolic − diastolic = 140 − 80 = 60 mmHg.",
+    "Pulse pressure reflects arterial elasticity and stroke volume — a simple subtraction question that appears often because it's easy to compute under time pressure once you know the formula."
+  ),
+  Q('ch8','application','sata',
+    "Which of the following are appropriate elements of the general survey? Select all that apply.",
+    ["Level of consciousness and behavior","Posture and gait","Serum electrolyte results",
+     "Dress and hygiene appropriate for the weather","Apparent age compared to stated age","A detailed 12-lead EKG"],
+    [0,1,3,4],
+    "The general survey relies on observation as the client is first encountered: level of consciousness/behavior, posture/gait, dress/hygiene, and apparent versus stated age. Lab values and diagnostic tests like an EKG are not part of the general survey itself.",
+    "The general survey is purely observational — if an option requires a lab test or diagnostic machine, it does not belong in the general survey."
+  ),
+
+  // ---------------- CH 14: Skin, Hair, Nails ----------------
+  Q('ch14','recall','single',
+    "The \"D\" in the ABCDE mnemonic for assessing a skin lesion stands for:",
+    ["Depth","Diameter greater than 6 mm","Duration of the lesion","Dryness of surrounding skin"],
+    1,
+    "ABCDE = Asymmetry, Border irregularity, Color variegation, Diameter greater than 6 mm (about the size of a pencil eraser), Evolution (change over time).",
+    "Any lesion meeting several ABCDE criteria warrants prompt referral for further evaluation — this mnemonic is one of the highest-yield facts in Chapter 14."
+  ),
+  Q('ch14','application','single',
+    "To assess skin turgor, the nurse should pinch the skin at which location, and what finding suggests dehydration?",
+    ["The back of the hand; turgor testing is most reliable there in all age groups","Below the clavicle; skin that remains 'tented' and returns slowly indicates dehydration",
+     "The sole of the foot; turgor is always normal there","The scalp; hair loss confirms dehydration"],
+    1,
+    "Skin turgor is best assessed on unexposed skin below the clavicle. 'Tenting' — the skin staying pinched and slowly returning to flat — indicates dehydration and reduced skin elasticity.",
+    "Do not use the back of the hand to assess turgor in older adults — normal age-related loss of connective tissue makes that site unreliable and can cause a false-positive finding."
+  ),
+  Q('ch14','recall','single',
+    "A normal capillary refill time is:",
+    ["Less than 3 seconds","5–8 seconds","10 seconds or more","There is no normal range; it varies by client"],
+    0,
+    "Capillary refill should return within about 3 seconds (some sources cite <2 seconds) after the nail bed is briefly blanched — a quick indicator of peripheral perfusion.",
+    "Capillary refill is one of the fastest bedside perfusion checks a nurse can perform — know the cutoff cold, since it appears across cardiac, vascular, and skin assessment questions."
+  ),
+  Q('ch14','application','single',
+    "The nurse notes that a client's nail base angle has flattened to about 180°, with the diamond-shaped window disappearing when the nails are placed together. This finding is most consistent with:",
+    ["Normal aging change","Clubbing, often associated with chronic hypoxia from cardiac or respiratory disease",
+     "Early clubbing that requires no further evaluation","A normal variant with no clinical significance"],
+    1,
+    "A normal nail base angle is about 160° with a visible diamond-shaped window when the dorsal surfaces of the thumbnails are opposed. When the angle flattens to 180° or more and the window disappears, this is clubbing — a classic sign of chronic hypoxia (cardiac or respiratory disease).",
+    "Clubbing is one of the clearest visual/physical exam clues linking a skin/nail chapter finding to cardiopulmonary pathology — expect it to be tested across multiple units."
+  ),
+  Q('ch14','recall','single',
+    "Which factor is the greatest risk for developing an MRSA infection?",
+    ["Advanced age alone","Impaired skin integrity","Eating a low-protein diet","Wearing cotton clothing"],
+    1,
+    "Impaired skin integrity (open wounds, breaks in the skin barrier) is the greatest risk factor for MRSA, especially in hospital, long-term care, and close-contact community settings.",
+    "Prevention teaching pairs with this fact: frequent hand hygiene, covering wounds, laundering linens in hot water, and not sharing personal items like razors or towels."
+  ),
+  Q('ch14','application','single',
+    "The nurse documents pitting edema that leaves an indentation lasting a long time with obvious, deep pitting. This finding should be graded as:",
+    ["1+","2+","3+","4+"],
+    3,
+    "Edema grading: 1+ = slight indentation, no perceptible swelling; 2+ = indentation subsides rapidly; 3+ = indentation remains for a short time with obvious swelling; 4+ = indentation lasts a long time with deep pitting.",
+    "Higher edema grade = more severe and longer-lasting indentation. This is the opposite pattern from remembering 'normal pulse = 2+,' so keep the two 0–4+ scales mentally separate."
+  ),
+  Q('ch14','recall','single',
+    "When assessing the scalp for lesions or parasites, the nurse should:",
+    ["Avoid touching the hair to prevent spreading lice","Wear gloves and separate the hair at approximately 1-inch intervals to inspect the scalp",
+     "Only inspect the scalp if the client reports itching","Use a comb dipped in alcohol before every assessment"],
+    1,
+    "The nurse should wear gloves and part the hair at roughly 1-inch intervals across the scalp to inspect for lesions, dandruff, cleanliness, and parasites such as lice.",
+    "Standard precautions (gloves) apply any time there is potential contact with hair, scalp lesions, or body fluids during assessment."
+  ),
+  Q('ch14','application','single',
+    "Which is an appropriate consideration when assessing skin in an older adult client?",
+    ["Expect skin turgor testing on the back of the hand to be accurate","Recognize that decreased skin elasticity is an expected age-related change, so turgor should be assessed over the sternum or clavicle instead",
+     "Assume any skin tenting in an older adult confirms dehydration","Avoid assessing the skin of older adults altogether"],
+    1,
+    "Aging skin normally loses elasticity and subcutaneous fat, which can cause false tenting on the hands even when the client is well hydrated. The sternum or clavicle area gives a more reliable turgor assessment in older adults.",
+    "Whenever 'older adult' appears in a skin question, expect the correct answer to adjust technique or interpretation rather than apply the same standard used for younger adults."
+  ),
+
+  // ---------------- CH 22: Peripheral Vascular ----------------
+  Q('ch22','application','single',
+    "A client reports leg pain that occurs with walking and resolves within minutes of rest, along with cool, pale, shiny skin and hair loss on the lower legs. This presentation is most consistent with:",
+    ["Chronic venous insufficiency","Arterial insufficiency (PAD) with intermittent claudication","Deep vein thrombosis","Normal age-related change"],
+    1,
+    "Intermittent claudication — muscle pain with activity relieved by rest — combined with cool, pale, shiny skin and hair loss is classic for arterial insufficiency/peripheral artery disease (PAD), caused by reduced arterial blood flow.",
+    "Arterial = cold, pale, thin/shiny skin, weak pulses, pain WITH walking, relieved by rest. Keep this cluster of five features together as one memorized set."
+  ),
+  Q('ch22','application','single',
+    "Which finding is most consistent with chronic venous insufficiency rather than arterial insufficiency?",
+    ["Cool skin with weak or absent pulses","Bilateral dependent edema with brownish ankle pigmentation and aching that worsens with standing",
+     "Pain relieved by dangling the leg","Ulcers located on the tips of the toes with well-defined borders"],
+    1,
+    "Venous insufficiency typically presents with bilateral, dependent edema, brown pigmentation from hemosiderin deposits around the ankles, aching/heaviness aggravated by prolonged standing or sitting, varicose veins, and ulcers located above the ankle.",
+    "Venous = warm, brown-pigmented, edema present, pulses often intact, ulcers around the ankle, achy/heavy legs. Contrast this directly with the arterial cluster above."
+  ),
+  Q('ch22','analysis','single',
+    "A client develops sudden unilateral swelling, warmth, and pain in one calf. This presentation is most concerning for:",
+    ["Bilateral dependent edema from heart failure","Deep vein thrombosis (DVT)","Normal venous insufficiency","Raynaud's disease"],
+    1,
+    "Unilateral swelling with warmth and pain strongly suggests a deep vein thrombosis, which typically presents in one leg. Bilateral, symmetric edema is more typical of dependent or systemic causes like heart failure.",
+    "The word 'unilateral' is a key differentiator on NCLEX — one-sided leg swelling is treated as a possible DVT until ruled out, given the risk of pulmonary embolism."
+  ),
+  Q('ch22','recall','single',
+    "On the pulse amplitude grading scale, a grade of 0 indicates:",
+    ["A bounding pulse","A normal pulse","An absent pulse","A pulse that is difficult but possible to obliterate"],
+    2,
+    "Pulse amplitude: 0 = absent, 1+ = weak/diminished, 2+ = normal, 3+ = strong, 4+ = bounding.",
+    "An absent pulse (0) in an extremity is an urgent finding that should be reported immediately, especially with other signs of acute arterial occlusion (pain, pallor, pulselessness, paresthesia, paralysis, poikilothermia — the '6 Ps')."
+  ),
+  Q('ch22','application','single',
+    "Where should the nurse palpate to assess the posterior tibial pulse?",
+    ["On top of the foot, lateral to the extensor tendon","Behind the medial malleolus of the ankle","Behind the knee in the popliteal fossa","Under the inguinal ligament"],
+    1,
+    "The posterior tibial pulse is palpated behind (posterior to) the medial malleolus of the ankle. The dorsalis pedis is on top of the foot; the popliteal is behind the knee; the femoral is under the inguinal ligament.",
+    "In peripheral vascular insufficiency, pulses farthest from the heart (like the posterior tibial and dorsalis pedis) weaken first — always assess and compare bilaterally."
+  ),
+  Q('ch22','application','single',
+    "What is the primary purpose of performing an Allen test before an arterial procedure such as an ABG draw from the radial artery?",
+    ["To assess venous insufficiency in the hand","To confirm the ulnar artery can adequately perfuse the hand if the radial artery is compromised",
+     "To measure blood pressure in the upper extremity","To test for deep vein thrombosis in the arm"],
+    1,
+    "The Allen test assesses ulnar artery patency — confirming that if the radial artery is damaged or occluded during a procedure, the ulnar artery can still adequately supply blood flow to the hand.",
+    "Steps to remember: occlude both radial and ulnar arteries, have the client make a fist until pale, release the ulnar artery only, and watch for color to return — a normal test shows return of color."
+  ),
+  Q('ch22','recall','single',
+    "Which best describes Raynaud's disease?",
+    ["A permanent loss of arterial pulses caused by atherosclerosis","A familial vasospastic condition in which the fingers turn white then experience pain as circulation returns, often triggered by cold",
+     "A bacterial skin infection of the digits","A type of chronic venous ulcer"],
+    1,
+    "Raynaud's disease is a vasospastic condition, often familial, in which capillaries in the fingers temporarily stop functioning normally — fingers turn white (and often blue) with cold or stress exposure, followed by pain as circulation returns. There is no cure; management focuses on avoiding cold triggers and keeping extremities warm.",
+    "Raynaud's is triggered by cold/stress and is vasospastic (functional), which differs from PAD, which is a fixed structural narrowing from atherosclerosis."
+  ),
+  Q('ch22','application','sata',
+    "Which findings would the nurse expect when documenting a peripheral vascular assessment? Select all that apply.",
+    ["Color, temperature, and capillary refill","Pulse amplitude graded 0 to 4+","Edema graded 1+ to 4+",
+     "Location of any lesions or ulcers","Deep tendon reflex grading","Pupillary response"],
+    [0,1,2,3],
+    "Peripheral vascular documentation focuses on four key areas: color/temperature/capillary refill, pulse amplitude, edema grading, and location of any lesions or ulcers. Deep tendon reflexes and pupillary response belong to the neurologic exam, not the peripheral vascular exam.",
+    "SATA items often mix in findings from a different body system entirely (like reflexes or pupils) — those are the easiest distractors to eliminate first."
+  ),
+];
+
+/* =========================================================
+   STATE + PERSISTENCE
+   ========================================================= */
+const STORAGE_KEY = 'nsg303_qbank_v1';
+function defaultState(){
+  return {
+    xp:0, totalAnswered:0, totalCorrect:0, bestStreak:0, streak:0,
+    theme:'light',
+    perQuestion:{}, // id -> {seen, correctCount, wrongCount, lastResult, flagged}
+    missed:[] // ids currently "weak"
+  };
+}
+let state = loadState();
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return defaultState();
+    const parsed = JSON.parse(raw);
+    return Object.assign(defaultState(), parsed);
+  }catch(e){ return defaultState(); }
+}
+function saveState(){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){}
+}
+
+function rankForXP(xp){
+  if(xp>=600) return "NCLEX Ready";
+  if(xp>=300) return "Clinical Instructor";
+  if(xp>=100) return "Charge Nurse";
+  return "Nursing Student";
+}
+
+function refreshStatsBar(){
+  document.getElementById('statXP').textContent = state.xp;
+  const acc = state.totalAnswered ? Math.round(100*state.totalCorrect/state.totalAnswered)+'%' : '—';
+  document.getElementById('statAcc').textContent = acc;
+  document.getElementById('statStreak').textContent = state.streak + '🔥';
+  document.getElementById('statRank').textContent = rankForXP(state.xp);
+}
+
+/* =========================================================
+   FILTERS (home screen)
+   ========================================================= */
+let activeTopics = new Set(Object.keys(TOPICS));
+let activeBlooms = new Set(Object.keys(BLOOMS));
+
+function buildChips(){
+  const topicWrap = document.getElementById('topicChips');
+  topicWrap.innerHTML = '';
+  const allChip = document.createElement('button');
+  allChip.className = 'chip active';
+  allChip.textContent = 'All chapters';
+  allChip.onclick = () => { activeTopics = new Set(Object.keys(TOPICS)); renderChipStates(); renderModeGrid(); };
+  topicWrap.appendChild(allChip);
+  Object.keys(TOPICS).forEach(key=>{
+    const chip = document.createElement('button');
+    chip.className = 'chip active t-'+key;
+    chip.dataset.topic = key;
+    chip.textContent = TOPICS[key];
+    chip.onclick = () => {
+      if(activeTopics.has(key)){ activeTopics.delete(key); } else { activeTopics.add(key); }
+      if(activeTopics.size===0) activeTopics = new Set(Object.keys(TOPICS));
+      renderChipStates(); renderModeGrid();
+    };
+    topicWrap.appendChild(chip);
+  });
+
+  const bloomWrap = document.getElementById('bloomChips');
+  bloomWrap.innerHTML = '';
+  Object.keys(BLOOMS).forEach(key=>{
+    const chip = document.createElement('button');
+    chip.className = 'chip active';
+    chip.dataset.bloom = key;
+    chip.textContent = BLOOMS[key];
+    chip.onclick = () => {
+      if(activeBlooms.has(key)){ activeBlooms.delete(key); } else { activeBlooms.add(key); }
+      if(activeBlooms.size===0) activeBlooms = new Set(Object.keys(BLOOMS));
+      renderChipStates(); renderModeGrid();
+    };
+    bloomWrap.appendChild(chip);
+  });
+  renderChipStates();
+}
+function renderChipStates(){
+  document.querySelectorAll('#topicChips .chip[data-topic]').forEach(c=>{
+    c.classList.toggle('active', activeTopics.has(c.dataset.topic));
+  });
+  const allActive = activeTopics.size === Object.keys(TOPICS).length;
+  document.querySelector('#topicChips .chip:not([data-topic])').classList.toggle('active', allActive);
+  document.querySelectorAll('#bloomChips .chip').forEach(c=>{
+    c.classList.toggle('active', activeBlooms.has(c.dataset.bloom));
+  });
+}
+
+function filteredPool(){
+  return QUESTIONS.filter(q => activeTopics.has(q.topic) && activeBlooms.has(q.bloom));
+}
+
+/* =========================================================
+   MODE CARDS
+   ========================================================= */
+const MODES = [
+  {key:'study', emoji:'📖', name:'Study Mode', desc:'Full feedback + rationale + NCLEX tip after every question.', color:'#6C5CE7', tint:'#EBE8FD'},
+  {key:'exam', emoji:'📝', name:'Exam Mode', desc:'No feedback until the session ends — simulates test-day conditions.', color:'#FF6B6B', tint:'#FFE7E7'},
+  {key:'rapid', emoji:'⚡', name:'Rapid Fire', desc:'Quick single-select drills with minimal feedback between questions.', color:'#FFB020', tint:'#FFF3D9'},
+  {key:'weak', emoji:'🎯', name:'Weak Spots', desc:'Drills only the questions you have missed in past sessions.', color:'#20BF6B', tint:'#E2F8EC'},
+  {key:'random20', emoji:'🎲', name:'Random 20', desc:'A quick mixed 20-question session from your current filters.', color:'#3AA6FF', tint:'#E4F3FF'},
+];
+
+function renderModeGrid(){
+  const grid = document.getElementById('modeGrid');
+  grid.innerHTML = '';
+  const pool = filteredPool();
+  MODES.forEach(m=>{
+    const btn = document.createElement('button');
+    btn.className = 'mode-card';
+    btn.style.setProperty('--mc', m.tint);
+    btn.style.setProperty('--mc-solid', m.color);
+    let count = pool.length;
+    if(m.key==='weak') count = pool.filter(q=>state.missed.includes(q.id)).length;
+    if(m.key==='random20') count = Math.min(20,pool.length);
+    const disabled = count===0;
+    btn.disabled = disabled;
+    btn.innerHTML = `<div class="emoji">${m.emoji}</div><h3>${m.name}</h3><p>${m.desc}</p><div class="count">${disabled? 'No questions match current filters' : count+' question'+(count===1?'':'s')+' in queue'}</div>`;
+    btn.onclick = () => { if(!disabled) startSession(m.key); };
+    grid.appendChild(btn);
+  });
+}
+
+/* =========================================================
+   SESSION LOGIC
+   ========================================================= */
+let session = null;
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+function startSession(modeKey){
+  const pool = filteredPool();
+  let queueIds;
+  if(modeKey==='weak'){
+    queueIds = pool.filter(q=>state.missed.includes(q.id)).map(q=>q.id);
+  } else if(modeKey==='random20'){
+    queueIds = shuffle(pool).slice(0,20).map(q=>q.id);
+  } else if(modeKey==='rapid'){
+    queueIds = shuffle(pool).map(q=>q.id);
+  } else {
+    queueIds = pool.map(q=>q.id);
+  }
+  if(queueIds.length===0){ showToast('No questions match your filters.'); return; }
+
+  session = {
+    mode: modeKey,
+    queue: queueIds,
+    index: 0,
+    answers: {}, // id -> {selected:[], correct:bool}
+    confidence: {},
+    correctCount:0, wrongCount:0, xpEarned:0,
+    flagged: new Set(),
+    startTime: Date.now(),
+    deferFeedback: modeKey==='exam'
+  };
+  document.getElementById('sessionModeLabel').textContent = MODES.find(m=>m.key===modeKey).name;
+  showView('session');
+  renderQuestion();
+  tickTimer();
+}
+
+function currentQuestion(){
+  const id = session.queue[session.index];
+  return QUESTIONS.find(q=>q.id===id);
+}
+
+function renderNavigator(){
+  const nav = document.getElementById('navigator');
+  nav.innerHTML = '';
+  session.queue.forEach((id, i)=>{
+    const dot = document.createElement('button');
+    dot.className = 'nav-dot';
+    dot.textContent = i+1;
+    if(i===session.index) dot.classList.add('current');
+    const ans = session.answers[id];
+    if(ans && !session.deferFeedback){
+      dot.classList.add(ans.correct ? 'done-correct':'done-wrong');
+    } else if(ans && session.deferFeedback){
+      dot.classList.add('done-correct'); // just mark as answered, neutral-ish
+      dot.style.opacity = '0.7';
+    }
+    if(session.flagged.has(id)) dot.classList.add('flagged');
+    dot.onclick = () => { session.index = i; renderQuestion(); };
+    nav.appendChild(dot);
+  });
+}
+
+function renderQuestion(){
+  const q = currentQuestion();
+  document.getElementById('sessionCounter').textContent = `Q ${session.index+1} of ${session.queue.length}`;
+  document.getElementById('progressFill').style.width = (100*(session.index)/session.queue.length)+'%';
+  const tagTopicEl = document.getElementById('tagTopic');
+  tagTopicEl.textContent = TOPICS[q.topic];
+  tagTopicEl.className = 'tag t-'+q.topic;
+  document.getElementById('tagBloom').textContent = BLOOMS[q.bloom];
+  document.getElementById('tagSata').classList.toggle('hidden', q.type!=='sata');
+  document.getElementById('qStem').textContent = q.stem;
+  document.getElementById('flagBtn').classList.toggle('active', session.flagged.has(q.id));
+
+  const list = document.getElementById('optionsList');
+  list.innerHTML = '';
+  const existing = session.answers[q.id];
+  const letters = ['A','B','C','D','E','F'];
+  q.options.forEach((opt,i)=>{
+    const row = document.createElement('div');
+    row.className = 'opt';
+    const inputType = q.type==='sata' ? 'checkbox' : 'radio';
+    const checked = existing && existing.selected.includes(i) ? 'checked' : '';
+    row.innerHTML = `<span class="opt-letter">${letters[i]}</span>
+      <input type="${inputType}" name="opt" id="opt${i}" value="${i}" ${checked}>
+      <label for="opt${i}">${opt}</label>`;
+    row.querySelector('input').addEventListener('change', ()=>{
+      document.querySelectorAll('.opt').forEach(o=>o.classList.remove('selected'));
+      document.querySelectorAll('#optionsList input:checked').forEach(inp=>{
+        inp.closest('.opt').classList.add('selected');
+      });
+    });
+    if(checked) row.classList.add('selected');
+    list.appendChild(row);
+  });
+
+  const feedbackBox = document.getElementById('feedbackBox');
+  const submitBtn = document.getElementById('submitBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  if(existing && !session.deferFeedback){
+    showFeedback(q, existing);
+    submitBtn.classList.add('hidden');
+    nextBtn.classList.remove('hidden');
+    setOptionsDisabled(true);
+    revealCorrectness(q, existing);
+  } else {
+    feedbackBox.classList.add('hidden');
+    submitBtn.classList.remove('hidden');
+    submitBtn.disabled = false;
+    nextBtn.classList.toggle('hidden', !(existing && session.deferFeedback));
+    submitBtn.classList.toggle('hidden', !!(existing && session.deferFeedback));
+    setOptionsDisabled(!!(existing && session.deferFeedback));
+  }
+
+  document.getElementById('prevBtn').disabled = session.index===0;
+  renderNavigator();
+}
+
+function setOptionsDisabled(disabled){
+  document.querySelectorAll('#optionsList input').forEach(i=> i.disabled = disabled);
+}
+
+function revealCorrectness(q, ans){
+  const opts = document.querySelectorAll('#optionsList .opt');
+  const correctSet = Array.isArray(q.answer) ? q.answer : [q.answer];
+  opts.forEach((row,i)=>{
+    if(correctSet.includes(i)) row.classList.add('correct-reveal');
+    else if(ans.selected.includes(i)) row.classList.add('wrong-reveal');
+  });
+}
+
+function showFeedback(q, ans){
+  const box = document.getElementById('feedbackBox');
+  box.classList.remove('hidden');
+  box.classList.toggle('correct', ans.correct);
+  box.classList.toggle('wrong', !ans.correct);
+  document.getElementById('verdictText').textContent = ans.correct ? '✓ Correct' : '✗ Incorrect';
+  document.getElementById('verdictText').className = 'verdict ' + (ans.correct?'correct-text':'wrong-text');
+  document.getElementById('rationaleText').textContent = q.rationale;
+  document.getElementById('tipText').textContent = q.tip;
+  document.querySelectorAll('.conf-btn').forEach(b=>{
+    b.classList.toggle('active', session.confidence[q.id]===b.dataset.c);
+  });
+}
+
+document.getElementById('confidenceRow').addEventListener('click', (e)=>{
+  const btn = e.target.closest('.conf-btn');
+  if(!btn) return;
+  const q = currentQuestion();
+  session.confidence[q.id] = btn.dataset.c;
+  document.querySelectorAll('.conf-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+});
+
+function gradeAnswer(q, selected){
+  const correctSet = Array.isArray(q.answer) ? q.answer.slice().sort() : [q.answer];
+  const sel = selected.slice().sort();
+  if(sel.length !== correctSet.length) return false;
+  return sel.every((v,i)=>v===correctSet[i]);
+}
+
+document.getElementById('submitBtn').addEventListener('click', ()=>{
+  const q = currentQuestion();
+  const selected = Array.from(document.querySelectorAll('#optionsList input:checked')).map(i=>parseInt(i.value));
+  if(selected.length===0){ showToast('Select an answer first.'); return; }
+  const correct = gradeAnswer(q, selected);
+  session.answers[q.id] = {selected, correct};
+
+  // update global per-question stats
+  const pq = state.perQuestion[q.id] || {correctCount:0, wrongCount:0};
+  if(correct){ pq.correctCount++; state.missed = state.missed.filter(id=>id!==q.id); }
+  else { pq.wrongCount++; if(!state.missed.includes(q.id)) state.missed.push(q.id); }
+  state.perQuestion[q.id] = pq;
+  state.totalAnswered++;
+  if(correct) state.totalCorrect++;
+
+  if(correct){
+    session.correctCount++;
+    state.streak++;
+    state.bestStreak = Math.max(state.bestStreak, state.streak);
+    let gained = session.mode==='rapid' ? 5 : 10;
+    if(state.streak>=3) gained += 2;
+    session.xpEarned += gained;
+    state.xp += gained;
+  } else {
+    session.wrongCount++;
+    state.streak = 0;
+  }
+  saveState();
+  refreshStatsBar();
+
+  if(session.deferFeedback){
+    document.getElementById('submitBtn').classList.add('hidden');
+    document.getElementById('nextBtn').classList.remove('hidden');
+    setOptionsDisabled(true);
+    renderNavigator();
+  } else {
+    showFeedback(q, session.answers[q.id]);
+    revealCorrectness(q, session.answers[q.id]);
+    setOptionsDisabled(true);
+    document.getElementById('submitBtn').classList.add('hidden');
+    document.getElementById('nextBtn').classList.remove('hidden');
+    renderNavigator();
+  }
+});
+
+document.getElementById('nextBtn').addEventListener('click', ()=>{
+  if(session.index < session.queue.length-1){
+    session.index++;
+    renderQuestion();
+  } else {
+    endSession();
+  }
+});
+document.getElementById('prevBtn').addEventListener('click', ()=>{
+  if(session.index>0){ session.index--; renderQuestion(); }
+});
+document.getElementById('flagBtn').addEventListener('click', ()=>{
+  const q = currentQuestion();
+  if(session.flagged.has(q.id)) session.flagged.delete(q.id); else session.flagged.add(q.id);
+  document.getElementById('flagBtn').classList.toggle('active', session.flagged.has(q.id));
+  renderNavigator();
+});
+
+let timerInterval = null;
+function tickTimer(){
+  clearInterval(timerInterval);
+  timerInterval = setInterval(()=>{
+    if(!session) { clearInterval(timerInterval); return; }
+    const secs = Math.floor((Date.now()-session.startTime)/1000);
+    const m = Math.floor(secs/60), s = secs%60;
+    document.getElementById('sessionTimer').textContent = `${m}:${s.toString().padStart(2,'0')}`;
+  },1000);
+}
+
+function endSession(){
+  clearInterval(timerInterval);
+  const total = session.queue.length;
+  const pct = total ? Math.round(100*session.correctCount/total) : 0;
+  document.getElementById('summaryPct').textContent = pct+'%';
+  document.getElementById('summaryModeLabel').textContent = MODES.find(m=>m.key===session.mode).name + ' complete';
+  document.getElementById('sumCorrect').textContent = session.correctCount;
+  document.getElementById('sumWrong').textContent = session.wrongCount;
+  document.getElementById('sumXP').textContent = '+'+session.xpEarned;
+  showView('summary');
+  refreshStatsBar();
+  renderModeGrid();
+  if(pct>=80) launchConfetti();
+}
+
+function launchConfetti(){
+  const colors = ['#6C5CE7','#14B8A6','#FF6B6B','#FFB020','#3AA6FF','#20BF6B'];
+  const count = 60;
+  for(let i=0;i<count;i++){
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    const size = 6 + Math.random()*6;
+    piece.style.width = size+'px';
+    piece.style.height = (size*0.4)+'px';
+    piece.style.left = Math.random()*100+'vw';
+    piece.style.background = colors[Math.floor(Math.random()*colors.length)];
+    piece.style.animationDuration = (2.2 + Math.random()*1.6)+'s';
+    piece.style.animationDelay = (Math.random()*0.4)+'s';
+    piece.style.transform = `rotate(${Math.random()*360}deg)`;
+    document.body.appendChild(piece);
+    setTimeout(()=>piece.remove(), 4200);
+  }
+}
+
+document.getElementById('retryBtn').addEventListener('click', ()=> startSession(session.mode));
+document.getElementById('reviewMissedBtn').addEventListener('click', ()=>{
+  if(state.missed.length===0){ showToast('No missed questions to review — nice work!'); return; }
+  startSession('weak');
+});
+document.getElementById('homeFromSummaryBtn').addEventListener('click', ()=> showView('home'));
+document.getElementById('exitSessionBtn').addEventListener('click', ()=>{
+  if(session && session.index < session.queue.length-1 && Object.keys(session.answers).length < session.queue.length){
+    openConfirm('Leave session?', "Your session progress won't be saved as a completed session, but XP already earned stays.", ()=>{
+      clearInterval(timerInterval); showView('home');
+    }, 'Leave');
+  } else {
+    clearInterval(timerInterval); showView('home');
+  }
+});
+
+/* =========================================================
+   VIEW SWITCHING
+   ========================================================= */
+function showView(name){
+  document.getElementById('view-home').classList.toggle('hidden', name!=='home');
+  document.getElementById('view-session').classList.toggle('hidden', name!=='session');
+  document.getElementById('view-summary').classList.toggle('hidden', name!=='summary');
+  window.scrollTo({top:0, behavior:'smooth'});
+  if(name==='home'){ renderModeGrid(); }
+}
+document.getElementById('homeBtn').addEventListener('click', ()=> showView('home'));
+
+/* =========================================================
+   THEME
+   ========================================================= */
+function applyTheme(){
+  document.documentElement.setAttribute('data-theme', state.theme);
+  document.getElementById('themeToggle').textContent = state.theme==='dark' ? '🌙' : '☀️';
+}
+document.getElementById('themeToggle').addEventListener('click', ()=>{
+  state.theme = state.theme==='dark' ? 'light' : 'dark';
+  saveState(); applyTheme();
+});
+
+/* =========================================================
+   RESET / EXPORT
+   ========================================================= */
+function openConfirm(title, desc, onConfirm, confirmLabel){
+  const overlay = document.createElement('div');
+  overlay.className = 'overlay';
+  overlay.innerHTML = `<div class="modal">
+    <div style="font-size:26px;">⚠️</div>
+    <h3>${title}</h3>
+    <p>${desc}</p>
+    <div class="modal-actions">
+      <button class="btn" id="cancelModalBtn">Cancel</button>
+      <button class="btn danger" id="confirmModalBtn">${confirmLabel||'Confirm'}</button>
+    </div>
+  </div>`;
+  document.body.appendChild(overlay);
+  overlay.querySelector('#cancelModalBtn').onclick = ()=> overlay.remove();
+  overlay.querySelector('#confirmModalBtn').onclick = ()=> { overlay.remove(); onConfirm(); };
+}
+
+document.getElementById('resetBtn').addEventListener('click', ()=>{
+  openConfirm('Reset all progress?', 'This permanently erases your XP, streak, accuracy, rank, and all question history on this device.', ()=>{
+    state = defaultState();
+    saveState();
+    refreshStatsBar();
+    renderModeGrid();
+    showToast('Progress reset.');
+  }, 'Yes, Reset');
+});
+
+document.getElementById('exportBtn').addEventListener('click', ()=>{
+  const blob = new Blob([JSON.stringify(state,null,2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'nsg303-qbank-progress.json';
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+let toastTimer = null;
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=> t.classList.remove('show'), 2600);
+}
+
+/* =========================================================
+   INIT
+   ========================================================= */
+function init(){
+  applyTheme();
+  refreshStatsBar();
+  buildChips();
+  renderModeGrid();
+  showView('home');
+}
+init();
+</script>
+</body>
+</html>
